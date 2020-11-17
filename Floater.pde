@@ -51,8 +51,8 @@ class Floater //Do NOT modify the Floater class! Make changes in the Spaceship c
   {
     myXspeed = 0;
     myYspeed = 0;
-    myCenterX = (double)(Math.random()*700);
-    myCenterY = (double)(Math.random()*700);
+    myCenterX = (double)(Math.random()*600);
+    myCenterY = (double)(Math.random()*600);
     myPointDirection = (double)(Math.random()*361);
   }
   public void show ()  //Draws the floater at the current position  
