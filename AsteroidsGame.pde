@@ -5,7 +5,7 @@ boolean isWpressed = false, isApressed = false, isDpressed = false;
 
 public void setup() 
 {
-  size(700, 700);
+  size(600, 600);
   background(10);
   for (int i = 0; i < sky.length; i++)
   {
