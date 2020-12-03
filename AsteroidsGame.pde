@@ -2,7 +2,7 @@
 Spaceship bob = new Spaceship();
 ArrayList <Asteroid> ast = new ArrayList <Asteroid>();
 Star[] sky = new Star[250];
-int asteroids = 1;
+int asteroids = 5;
 boolean isWpressed = false, isApressed = false, isDpressed = false;
 
 public void setup() 
