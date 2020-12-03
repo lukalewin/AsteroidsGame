@@ -1,6 +1,8 @@
 //your variable declarations here
 Spaceship bob = new Spaceship();
+ArrayList <Asteroid> ast = new ArrayList <Asteroid>();
 Star[] sky = new Star[250];
+int asteroids = 1;
 boolean isWpressed = false, isApressed = false, isDpressed = false;
 
 public void setup() 
@@ -11,6 +13,10 @@ public void setup()
   {
     sky[i] = new Star();
   }
+  for (int i = 0; i < asteroids; i++)
+  {
+    ast.add(new Asteroid());
+  }
 }
 public void draw() 
 {
@@ -18,6 +24,26 @@ public void draw()
   for (int i = 0; i < sky.length; i++)
   {
     sky[i].show();
+  }
+  for (int i = 0; i < ast.size(); i++)
+  {
+    ast.get(i).show();
+    ast.get(i).move();
+    if (dist((float)ast.get(i).getX(), (float)ast.get(i).getY(), (float)bob.getX(), (float)bob.getY()) < 20) {
+      ast.remove(i);
+    }
+  }
+  if (ast.size() == 0) {
+    fill(200);
+    textAlign(CENTER);
+    textSize(60);
+    text("VICTORY!", 300, 300);
+    bob.changeColor();
+  } else {
+    fill(200);
+    textSize(20);
+    textAlign(LEFT);
+    text("Asteroids left: " + ast.size(), 5, 20);
   }
   fill(255);
   bob.show();
