@@ -2,8 +2,8 @@ class Asteroid extends Floater {
   private double rotSpeed = Math.random()*4;
   public Asteroid() {
     corners = 6;
-    xCorners = new int[]{(int)(Math.random()*4-13),(int)(Math.random()*4+5),(int)(Math.random()*4+11),(int)(Math.random()*4+5),(int)(Math.random()*4-13),(int)(Math.random()*4-18)};
-    yCorners = new int[]{(int)(Math.random()*4-10),(int)(Math.random()*4-10),(int)(Math.random()*4),(int)(Math.random()*4+6),(int)(Math.random()*4+6),(int)(Math.random()*4)};
+    xCorners = new int[]{(int)(Math.random()*5-13),(int)(Math.random()*5+5),(int)(Math.random()*5+11),(int)(Math.random()*5+5),(int)(Math.random()*5-13),(int)(Math.random()*5-18)};
+    yCorners = new int[]{(int)(Math.random()*5-10),(int)(Math.random()*5-10),(int)(Math.random()*5),(int)(Math.random()*5+6),(int)(Math.random()*5+6),(int)(Math.random()*5)};
     myColor = color((int)(Math.random()*10+173), (int)(Math.random()*5+94), (int)(Math.random()*5+73));
     myCenterX = (double)(Math.random()*600);
     myCenterY = (double)(Math.random()*600);
