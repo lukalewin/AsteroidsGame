@@ -46,11 +46,12 @@ public void draw()
 
   // Victory / Game Over / Stats text
   if (life.getLife() <= 0) {
-    fill(220, 0, 0);
+    fill(255, 85, 85);
     textAlign(CENTER);
     textSize(80);
     text("GAME OVER", 300, 320);
-    ship.setColor(220, 0, 0);
+    ship.setColor(255, 85, 85);
+    life.hide();
     for (int i = 0; i < bul.size(); i++) {
       bul.remove(i);
     }
@@ -63,6 +64,7 @@ public void draw()
     textSize(80);
     text("VICTORY!", 300, 320);
     ship.changeColor();
+    life.hide();
     for (int i = 0; i < bul.size(); i++)
     {
       bul.remove(i);
