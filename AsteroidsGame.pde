@@ -1,9 +1,10 @@
 //your variable declarations here
-Spaceship bob = new Spaceship();
+Spaceship ship = new Spaceship();
 ArrayList <Asteroid> ast = new ArrayList <Asteroid>();
+ArrayList <Bullet> bul = new ArrayList <Bullet>();
 Star[] sky = new Star[250];
 int asteroids = 5;
-boolean isWpressed = false, isApressed = false, isDpressed = false;
+boolean isWpressed = false, isApressed = false, isDpressed = false, isSpacepressed = false;
 
 public void setup() 
 {
@@ -21,48 +22,82 @@ public void setup()
 public void draw() 
 {
   background(10);
+  // Stars
   for (int i = 0; i < sky.length; i++)
   {
     sky[i].show();
   }
+
+  // Asteroids
   for (int i = 0; i < ast.size(); i++)
   {
     ast.get(i).show();
     ast.get(i).move();
-    if (dist((float)ast.get(i).getX(), (float)ast.get(i).getY(), (float)bob.getX(), (float)bob.getY()) < 20) {
+    
+    // Ship x Asteroid Collisions
+    if (dist((float)ast.get(i).getX(), (float)ast.get(i).getY(), (float)ship.getX(), (float)ship.getY()) < 20) {
       ast.remove(i);
     }
   }
+
+  // Stats / Victory text
   if (ast.size() == 0) {
     fill(200);
     textAlign(CENTER);
     textSize(60);
     text("VICTORY!", 300, 300);
-    bob.changeColor();
+    ship.changeColor();
+    for (int i = 0; i < bul.size(); i++)
+    {
+      bul.remove(i);
+    }
   } else {
     fill(200);
     textSize(20);
     textAlign(LEFT);
     text("Asteroids left: " + ast.size(), 5, 20);
   }
+
+  // Bullets
+  for (int i = 0; i < bul.size(); i++)
+  {
+    bul.get(i).show();
+    bul.get(i).move();
+
+    // Bullet x Asteroid Collisions
+    for (int x = 0; x < ast.size(); x++)
+    {
+      if (dist((float)ast.get(x).getX(), (float)ast.get(x).getY(), (float)bul.get(i).getX(), (float)bul.get(i).getY()) < 20) 
+      {
+        ast.remove(x);
+        bul.remove(i);
+        break;
+      }
+    }
+  }
+
+  // Showing / Moving ship
   fill(255);
-  bob.show();
-  bob.move();
+  ship.show();
+  ship.move();
+  
+  // Ship Movement
   if (isWpressed && isApressed) {
-    bob.accelerate(0.15);
-    bob.turn(-5);
+    ship.accelerate(0.15);
+    ship.turn(-5);
   } else if (isWpressed && isDpressed) {
-    bob.accelerate(0.15);
-    bob.turn(5);
+    ship.accelerate(0.15);
+    ship.turn(5);
   } else if (isWpressed) {
-    bob.accelerate(0.15);
+    ship.accelerate(0.15);
   } else if (isApressed) {
-    bob.turn(-5);
+    ship.turn(-5);
   } else if (isDpressed) {
-    bob.turn(5);
+    ship.turn(5);
   }
 }
 
+// Keypresses for movement and rotation
 public void keyPressed()
 {
   if (key == 'w') {
@@ -72,10 +107,14 @@ public void keyPressed()
   } else if (key == 'd') {
     isDpressed = true;
   } else if (key == 'q') {
-    bob.hyperspace();
+    ship.hyperspace();
+  } else if (key == ' ') {
+    bul.add(new Bullet(ship));
+    bul.get(bul.size()-1).accelerate(6.0);
   }
 }
 
+// Key releases for movement and rotation
 public void keyReleased()
 {
   if (key == 'w') {
