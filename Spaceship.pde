@@ -27,4 +27,8 @@ class Spaceship extends Floater
   public void changeColor() {
     myColor = color((int)(Math.random()*256),(int)(Math.random()*256),(int)(Math.random()*256));
   }
+  
+  public void setColor(int r, int g, int b) {
+    myColor = color(r,g,b);
+  }
 }
