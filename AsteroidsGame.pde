@@ -5,7 +5,7 @@ ArrayList <Bullet> bul = new ArrayList <Bullet>();
 Life life = new Life();
 Star[] sky = new Star[250];
 int asteroids = 10;
-boolean isWpressed = false, isApressed = false, isDpressed = false, isSpacepressed = false;
+boolean isWpressed = false, isApressed = false, isDpressed = false, isSpacepressed = false, isSpressed = false;
 
 public void setup() 
 {
@@ -112,6 +112,14 @@ public void draw()
     ship.turn(5);
   } else if (isWpressed) {
     ship.accelerate(0.15);
+  } else if (isSpressed && isApressed) {
+    ship.decelerate(0.1);
+    ship.turn(-5);
+  } else if (isSpressed && isDpressed) {
+    ship.decelerate(0.1);
+    ship.turn(5);
+  } else if (isSpressed) {
+    ship.decelerate(0.1);
   } else if (isApressed) {
     ship.turn(-5);
   } else if (isDpressed) {
@@ -124,6 +132,8 @@ public void keyPressed()
 {
   if (key == 'w') {
     isWpressed = true;
+  } if (key == 's') {
+    isSpressed = true;
   } else if (key == 'a') {
     isApressed = true;
   } else if (key == 'd') {
@@ -141,6 +151,8 @@ public void keyReleased()
 {
   if (key == 'w') {
     isWpressed = false;
+  } if (key == 's') {
+    isSpressed = false;
   } else if (key == 'a') {
     isApressed = false;
   } else if (key == 'd') {
