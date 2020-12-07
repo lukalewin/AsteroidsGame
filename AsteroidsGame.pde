@@ -2,8 +2,9 @@
 Spaceship ship = new Spaceship();
 ArrayList <Asteroid> ast = new ArrayList <Asteroid>();
 ArrayList <Bullet> bul = new ArrayList <Bullet>();
+Life life = new Life();
 Star[] sky = new Star[250];
-int asteroids = 5;
+int asteroids = 10;
 boolean isWpressed = false, isApressed = false, isDpressed = false, isSpacepressed = false;
 
 public void setup() 
@@ -33,19 +34,34 @@ public void draw()
   {
     ast.get(i).show();
     ast.get(i).move();
-    
+
     // Ship x Asteroid Collisions
     if (dist((float)ast.get(i).getX(), (float)ast.get(i).getY(), (float)ship.getX(), (float)ship.getY()) < 20) {
+      life.setLife(life.getLife() - 30);
       ast.remove(i);
+      
+      break;
     }
   }
 
-  // Stats / Victory text
-  if (ast.size() == 0) {
-    fill(200);
+  // Victory / Game Over / Stats text
+  if (life.getLife() <= 0) {
+    fill(220, 0, 0);
     textAlign(CENTER);
-    textSize(60);
-    text("VICTORY!", 300, 300);
+    textSize(80);
+    text("GAME OVER", 300, 320);
+    ship.setColor(220, 0, 0);
+    for (int i = 0; i < bul.size(); i++) {
+      bul.remove(i);
+    }
+    for (int i = 0; i < ast.size(); i++) {
+      ast.remove(i);
+    }
+  } else if (ast.size() == 0) {
+    fill(200,255,255);
+    textAlign(CENTER);
+    textSize(80);
+    text("VICTORY!", 300, 320);
     ship.changeColor();
     for (int i = 0; i < bul.size(); i++)
     {
@@ -57,6 +73,7 @@ public void draw()
     textAlign(LEFT);
     text("Asteroids left: " + ast.size(), 5, 20);
   }
+
 
   // Bullets
   for (int i = 0; i < bul.size(); i++)
@@ -76,11 +93,14 @@ public void draw()
     }
   }
 
+  // Display Life
+  life.show();
+
   // Showing / Moving ship
   fill(255);
   ship.show();
   ship.move();
-  
+
   // Ship Movement
   if (isWpressed && isApressed) {
     ship.accelerate(0.15);
