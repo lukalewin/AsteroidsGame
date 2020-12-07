@@ -19,6 +19,10 @@ class Spaceship extends Floater
   public double getY() {
     return myCenterY;
   }
+  
+  public double getDirection() {
+    return myPointDirection;
+  }
 
   public void changeColor() {
     myColor = color((int)(Math.random()*256),(int)(Math.random()*256),(int)(Math.random()*256));
