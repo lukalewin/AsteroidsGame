@@ -4,7 +4,7 @@ ArrayList <Asteroid> ast = new ArrayList <Asteroid>();
 ArrayList <Bullet> bul = new ArrayList <Bullet>();
 Life life = new Life();
 Star[] sky = new Star[250];
-int asteroids = 10;
+int asteroids = 15;
 boolean isWpressed = false, isApressed = false, isDpressed = false, isSpacepressed = false, isSpressed = false;
 
 public void setup() 
